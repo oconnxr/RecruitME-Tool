@@ -49,8 +49,8 @@ the repository for all player data, and never commit player data to git.
    every existing row is rewritten in place and new rows are added below.
    Write values only: the formatting, dropdowns, checkboxes and column groups
    already cover rows 2–1000. Leave the `Summary` tab alone (its formulas
-   read `Players` live). If you refresh a position tab such as `2027 RHP`,
-   write columns `A:AT` only; `AU:AV` hold formulas that look up Priority and
+   read `Players` live). If you refresh a position tab (`2027 LHP`, `2027 RHP`,
+   `2027 Catchers`, `2027 Infield`, `2027 Outfield`), write columns `A:AT` only; `AU:AV` hold formulas that look up Priority and
    Assigned coach from `Players`.
 6. **Log the run.** Append one row to the `Updates` tab (create the tab with
    headers `Date, Type, Added, Updated, Status changes, Notes` if it is
