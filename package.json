@@ -1,0 +1,20 @@
+{
+  "name": "recruiting-agent",
+  "version": "0.1.0",
+  "description": "Agent that finds and ranks uncommitted high school baseball prospects",
+  "scripts": {
+    "recruit": "node src/cli.js",
+    "serve": "node src/cli.js serve",
+    "test": "node --test",
+    "build:apps-script": "node scripts/build-apps-script.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.5.0",
+    "zod": "^4.6.7"
+  },
+  "private": true,
+  "type": "module",
+  "bin": {
+    "recruit": "src/cli.js"
+  }
+}

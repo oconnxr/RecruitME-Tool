@@ -1,0 +1,82 @@
+{
+  "program": {
+    "name": "MSC Baseball",
+    "level": "NJCAA Division II",
+    "states": ["OK", "TX", "AR", "KS"],
+    "notes": "NJCAA D2 junior college. Primary recruiting territory is Oklahoma, Texas, Arkansas and Kansas. Prioritize the current senior class, then juniors. Good targets are players overlooked by four-year programs: solid tools, late developers, smaller-school standouts. Players who only hold four-year offers but no commitment are still targets."
+  },
+
+  "agent": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "maxWebSearches": 40,
+    "maxWebFetches": 25,
+    "maxTurns": 30,
+    "targetProspects": 25
+  },
+
+  "ranking": {
+    "weights": {
+      "measurables": 0.6,
+      "performance": 0.4
+    },
+    "priorScore": 35,
+    "minSample": { "atBats": 40, "inningsPitched": 15 },
+    "classAdjust": {
+      "veloPerYear": 2.0,
+      "exitVeloPerYear": 2.5,
+      "sixtyPerYear": 0.1,
+      "popPerYear": 0.05
+    },
+    "unverifiedCommitmentPenalty": 0.1
+  },
+
+  "benchmarks": {
+    "_comment": "Senior-year (current recruiting class) floor -> elite. A value at the floor scores 0, at elite scores 100, linear in between. 'lower: true' means lower is better. Tuned for NJCAA D2; adjust as your staff sees fit.",
+    "pitcher": {
+      "measurables": {
+        "fbVelo":   { "floor": 78,  "elite": 88,  "weight": 3,   "adjust": "veloPerYear" },
+        "fbTopVelo":{ "floor": 80,  "elite": 90,  "weight": 1,   "adjust": "veloPerYear" },
+        "heightIn": { "floor": 69,  "elite": 76,  "weight": 1 }
+      },
+      "performance": {
+        "era":      { "floor": 4.5, "elite": 0.9, "weight": 2, "lower": true },
+        "k9":       { "floor": 6,   "elite": 14,  "weight": 2 },
+        "bb9":      { "floor": 5.5, "elite": 1.5, "weight": 1.5, "lower": true },
+        "whip":     { "floor": 1.6, "elite": 0.8, "weight": 1, "lower": true }
+      }
+    },
+    "catcher": {
+      "measurables": {
+        "popTime":  { "floor": 2.25, "elite": 1.95, "weight": 3, "lower": true, "adjust": "popPerYear" },
+        "cVelo":    { "floor": 70,   "elite": 81,   "weight": 1.5, "adjust": "veloPerYear" },
+        "exitVelo": { "floor": 82,   "elite": 96,  "weight": 2,   "adjust": "exitVeloPerYear" },
+        "sixty":    { "floor": 7.7,  "elite": 7.0,  "weight": 0.5, "lower": true, "adjust": "sixtyPerYear" }
+      },
+      "performance": "hitting"
+    },
+    "infield": {
+      "measurables": {
+        "exitVelo": { "floor": 82,  "elite": 96, "weight": 2.5, "adjust": "exitVeloPerYear" },
+        "ifVelo":   { "floor": 75,  "elite": 86,  "weight": 2,   "adjust": "veloPerYear" },
+        "sixty":    { "floor": 7.5, "elite": 6.7, "weight": 1.5, "lower": true, "adjust": "sixtyPerYear" }
+      },
+      "performance": "hitting"
+    },
+    "outfield": {
+      "measurables": {
+        "exitVelo": { "floor": 82,  "elite": 96, "weight": 2.5, "adjust": "exitVeloPerYear" },
+        "ofVelo":   { "floor": 77,  "elite": 90,  "weight": 1.5, "adjust": "veloPerYear" },
+        "sixty":    { "floor": 7.3, "elite": 6.6, "weight": 2,   "lower": true, "adjust": "sixtyPerYear" }
+      },
+      "performance": "hitting"
+    },
+    "hitting": {
+      "avg":  { "floor": 0.280, "elite": 0.480, "weight": 1 },
+      "obp":  { "floor": 0.360, "elite": 0.580, "weight": 2 },
+      "slg":  { "floor": 0.380, "elite": 0.850, "weight": 2 },
+      "hr":   { "floor": 0,     "elite": 10,    "weight": 0.5 },
+      "sb":   { "floor": 0,     "elite": 30,    "weight": 0.5 }
+    }
+  }
+}
